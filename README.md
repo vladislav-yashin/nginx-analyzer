@@ -15,3 +15,45 @@
   - Общее количество запросов
   - Среднее, медианное, 95-е перцентили времени запроса
   - Самый быстрый и медленный запрос
+
+## Запуск приложения
+
+Приложение запускается в Docker-контейнере. Оно читает лог-файл Nginx и генерирует отчёт в формате JSON.
+
+### Требования
+
+- [Docker](https://docs.docker.com/get-docker/)
+
+### Подготовка
+
+1. Убедитесь, что у вас есть лог-файл Nginx или используйте пример из logs/access.log
+
+### Запуск
+
+```bash
+docker build -t nginx-analyzer . docker run --rm -v {PWD}/reports:/app/reports nginx-analyzer
+```
+
+После выполнения:
+- Отчёт будет сохранён в `reports/report.json`
+
+### Пример содержимого отчёта
+
+```json
+{
+  "total_requests": 50,
+  "average_request_time": 0.0947,
+  "median_request_time": 0.025,
+  "p95_request_time": 0.312,
+  "slowest_request_time": 1.502,
+  "fastest_request_time": 0.001
+}
+```
+
+### Для разработчиков: запуск линтера
+
+Если вы вносите изменения в код, перед коммитом проверьте стиль:
+
+```bash
+bash docker run --rm --entrypoint="" nginx-analyzer sh -c "poetry run ruff check ."
+```
