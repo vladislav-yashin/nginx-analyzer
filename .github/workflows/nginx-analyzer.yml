@@ -9,7 +9,7 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    name: Lint with ruff (via Docker)
+    name: Lint with ruff
 
     steps:
       - name: Checkout code
@@ -21,7 +21,10 @@ jobs:
 
       - name: Run ruff via Docker
         run: |
-          docker run --rm nginx-analyzer poetry run ruff check .
+          docker run --rm \
+            --entrypoint=poetry \
+            nginx-analyzer \
+            run ruff check .
 
   docker:
     runs-on: ubuntu-latest
