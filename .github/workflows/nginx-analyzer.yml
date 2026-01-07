@@ -19,12 +19,12 @@ jobs:
         run: |
           docker build -t nginx-analyzer .
 
-      - name: Run ruff via Docker
+      - name: Run ruff
         run: |
           docker run --rm \
             --entrypoint=poetry \
             nginx-analyzer \
-            run ruff check .
+            run ruff check src
 
   docker:
     runs-on: ubuntu-latest
