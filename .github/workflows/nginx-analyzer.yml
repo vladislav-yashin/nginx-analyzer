@@ -1,4 +1,3 @@
-# .github/workflows/docker.yml
 name: Build and Run with Docker
 
 on:
@@ -15,32 +14,29 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+      - name: Create logs and reports directories
+        run: |
+          mkdir -p logs reports
 
       - name: Build Docker image
         run: |
           docker build -t nginx-analyzer .
 
-      - name: Run Docker container
+      - name: Run Docker container with volume mounts
         run: |
-          docker run --name nginx-analyzer-container \
+          docker run --rm \
             -v ${PWD}/logs:/app/logs \
+            -v ${PWD}/reports:/app/reports \
             nginx-analyzer
 
-      - name: Check reports/report.json exists
+      - name: Verify report.json was generated
         run: |
           if [ -f "reports/report.json" ]; then
-            echo "✅ report.json успешно создан."
+            echo "✅ Файл reports/report.json успешно создан."
             cat reports/report.json
           else
-            echo "❌ Файл reports/report.json не найден."
+            echo "❌ Файл reports/report.json не найден!"
+            echo "Содержимое reports/:"
             ls -la reports/
             exit 1
           fi
-
-      - name: Stop container
-        if: always()
-        run: |
-          docker stop nginx-analyzer-container || true
-          docker rm nginx-analyzer-container || true
