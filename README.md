@@ -1,5 +1,7 @@
 # 📊 Анализ логов Nginx — Домашнее задание по курсу Otus Python
 
+[![Build](https://github.com/vladislav-yashin/nginx-analyzer/actions/workflows/nginx-analyzer.yml/badge.svg)](https://github.com/vladislav-yashin/nginx-analyzer/actions/workflows/nginx-analyzer.yml)
+
 Простой анализатор логов Nginx, который парсит access-логи, извлекает данные о запросах и генерирует JSON-отчёт с метриками производительности.
 
 ---
