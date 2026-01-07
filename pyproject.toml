@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "nginx-analyzer"
+version = "0.1.0"
+description = ""
+authors = ["Vladislav Yashin <vaiashin@domclick.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+ruff = "==0.14.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "ruff (>=0.14.10,<0.15.0)"
+]
