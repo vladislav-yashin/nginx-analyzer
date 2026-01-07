@@ -1,4 +1,3 @@
-# src/parser.py
 import re
 from typing import List
 from .models import LogEntry

@@ -1,4 +1,3 @@
-# src/main.py
 import argparse
 import json
 from .parser import parse_log_file
