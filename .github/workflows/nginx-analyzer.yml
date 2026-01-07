@@ -29,6 +29,17 @@ jobs:
             -v ${PWD}/logs:/app/logs \
             nginx-analyzer
 
+      - name: Check reports/report.json exists
+        run: |
+          if [ -f "reports/report.json" ]; then
+            echo "✅ report.json успешно создан."
+            cat reports/report.json
+          else
+            echo "❌ Файл reports/report.json не найден."
+            ls -la reports/
+            exit 1
+          fi
+
       - name: Stop container
         if: always()
         run: |
