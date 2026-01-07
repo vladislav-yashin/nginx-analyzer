@@ -24,7 +24,6 @@ jobs:
 
       - name: Run Docker container
         run: |
-          # Запускаем контейнер в фоне
           docker run --name nginx-analyzer-container \
             -v ${PWD}/logs:/app/logs \
             nginx-analyzer

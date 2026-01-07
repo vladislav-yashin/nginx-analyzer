@@ -21,6 +21,7 @@ RUN poetry config virtualenvs.create false \
     && poetry install --only main --no-interaction --no-ansi
 
 COPY logs/ logs/
+COPY reports/ reports/
 COPY src/ src/
 
 ENTRYPOINT ["poetry", "run", "python", "-m", "src.main", "logs/access.log"]
